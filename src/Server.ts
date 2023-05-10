@@ -2,6 +2,7 @@ import cors from 'cors'
 import { config } from 'dotenv'
 import express, { json, urlencoded } from 'express'
 import helmet from 'helmet'
+import { error } from './middlewares/CheckErrorApi'
 import routers from './routes/ServerRoutes'
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(cors({
    origin: '*'
 }))
 app.use(helmet())
+app.use(error)
 app.use(routers)
 
 app.listen(PORT, () => {
