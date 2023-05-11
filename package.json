@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon sucrase src/Server.ts",
     "start": "node ./build/Server.js",
-    "build": "yarn tsc"
+    "build": "yarn tsc",
+    "teste": "yarn & yarn tsc"
   },
   "dependencies": {
     "cors": "^2.8.5",
