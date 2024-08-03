@@ -1,0 +1,17 @@
+{
+   "compilerOptions": {
+      "target": "ES5",
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "module": "commonjs",
+      "outDir": "./dist",
+      "removeComments": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "strict": true,
+      "typeRoots": ["./node_modules/@types", "./@types"]
+   },
+   "include": ["src/**/*.ts", "@types/**/*.d.ts"],
+   "exclude": ["node_modules", "dist"]
+}
