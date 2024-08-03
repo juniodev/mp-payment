@@ -6,7 +6,9 @@ import {
 import {
 	payment
 } from '../../Core/MercadoPago'
-import { ngrokURL } from '../../Core/Ngrok'
+import {
+	ngrokURL
+} from '../../Core/Ngrok'
 
 import {
 	Post,
@@ -18,11 +20,11 @@ class PixPayment {
 	@Post('/payment/pix/create')
 	async create(req: Request, res: Response) {
 		try {
-			
+
 			const url = `https://${req.hostname}`
-			
+
 			const notificationURL = `${ngrokURL ?? url}/webhook/status/payment/pix/123`
-			
+
 			console.log(notificationURL)
 
 			const body = {
@@ -51,13 +53,17 @@ class PixPayment {
 	@Get('/payment/pix/verify')
 	async verify(req: Request, res: Response) {
 		try {
-			
-			const { id } = req.query
-			
-			const data = await payment.get({id})
-			
+
+			const {
+				id
+			} = req.query
+
+			const data = await payment.get({
+				id
+			})
+
 			return res.status(200).json(data)
-			
+
 		} catch (error) {
 			return res.sendStatus(400)
 		}
@@ -66,20 +72,22 @@ class PixPayment {
 	@Post('/webhook/status/payment/pix/:id')
 	async hookStatus(req: Request, res: Response) {
 		console.log(req.body)
-		const { 
-			type, data, action
+		const {
+			type,
+			data,
+			action
 		} = req.body
-		
+
 		if (action !== 'payment.updated') {
 			return res.sendStatus(400)
 		}
-		
+
 		if (type !== 'payment') {
 			return res.sendStatus(400)
 		}
-		
+
 		console.log(req.body)
-		
+
 		return res.sendStatus(200)
 	}
 
