@@ -59,10 +59,12 @@ class PixPayment {
          } = req.query
 
          const data = await payment.get({
-            id
+            id: Number(id)
          })
 
-         return res.status(200).json(data)
+         return res.status(200).json({
+            status: data.status
+         })
 
       } catch (error) {
          return res.sendStatus(400)
@@ -71,7 +73,7 @@ class PixPayment {
 
    @Post('/webhook/status/payment/pix/:id')
    async hookStatus(req: Request, res: Response) {
-      console.log(req.body)
+
       const {
          type,
          data,
@@ -82,11 +84,13 @@ class PixPayment {
          return res.sendStatus(400)
       }
 
-      if (type !== 'payment') {
-         return res.sendStatus(400)
-      }
+      // Verificar status do pagamento e executa funções auxiliares
 
-      console.log(req.body)
+      const result = await payment.get({
+         id: data.id
+      })
+      
+      console.log('Status pagamento: ', result.status)
 
       return res.sendStatus(200)
    }

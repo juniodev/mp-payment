@@ -26,7 +26,7 @@ let ngrokURL: string | undefined
 		process.exit(0)
 	})
 
-	ngrokURL = result.url()
+	ngrokURL = result.url() as string
 })()
 
 export {
